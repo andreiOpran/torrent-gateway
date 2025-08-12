@@ -10,7 +10,7 @@ class PortRequest(BaseModel):
     port: int
     client_ip: str
 
-    @field_validator('client_ip')
+    @classmethod
     def validate_ip(self, value):
         try:
             ipaddress.ip_address(value)
@@ -18,7 +18,7 @@ class PortRequest(BaseModel):
             raise ValueError('Invalid IP address')
         return value
 
-    @field_validator('port')
+    @classmethod
     def validate_port(self, value):
         if not 1 <= value <= 65535:
             raise ValueError('Port must be between 1 and 65535')
