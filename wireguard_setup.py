@@ -104,6 +104,26 @@ def start_local_wireguard():
                             capture_output=True, text=True, check=True)
 
 
+def main_setup():
+    server_private, server_public = generate_keys('server')
+    client_private, client_public = generate_keys('client')
+
+    server_config = write_server_config(server_private, client_public)
+    client_config = write_client_config(client_private, server_public)
+
+    # Save local client config
+    with open('wg0.conf', 'w') as f:
+        f.write(client_config)
+
+    # Upload server config and start
+    upload_and_start_server(server_config)
+
+    # Start local connection
+    start_local_wireguard()
+
+    print('VPN tunnel established.')
+
+
 if __name__ == '__main__':
     server_private, server_public = generate_keys('server')
     client_private, client_public = generate_keys('client')
