@@ -3,3 +3,8 @@
 client/.env
 server/.env
 .ssh-key
+client_public.key
+client_private.key
+server_public.key
+server_private.key
+wg0.conf
