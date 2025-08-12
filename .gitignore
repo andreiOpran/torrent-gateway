@@ -2,4 +2,4 @@
 .env
 client/.env
 server/.env
-.ssh_key
+.ssh-key
